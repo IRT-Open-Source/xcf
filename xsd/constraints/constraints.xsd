@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	<xs:element name="SpecificationConstraints">
+		<xs:annotation>
+			<xs:documentation>The container element for the specification
+				constraints.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Specifications">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="Specification" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element minOccurs="0" name="Tags">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="Tag">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DisplaynameLong"/>
+										<xs:element name="DisplaynameShort"/>
+										<xs:element name="Description" minOccurs="0"/>
+									</xs:sequence>
+									<xs:attribute name="ID" type="xs:ID" use="required"/>
+									<xs:attribute name="type" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Constraints">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="Constraint" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element minOccurs="0" name="GlobalSpecReferences">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="SpecifiedBy" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Specification">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element name="Acronym"/>
+				<xs:element ref="Version"/>
+				<xs:element ref="Config" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>This element contains further configuration that applies
+							to a spec.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="ID" type="xs:ID" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Name"/>
+
+	<xs:element name="Version"/>
+
+	<xs:element name="Config">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="disableSpecRef" minOccurs="0">
+					<xs:complexType>
+						<xs:annotation>
+							<xs:documentation>This (empty) element disables the occurence of this
+								spec in the report view result.</xs:documentation>
+						</xs:annotation>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="disableFilter" minOccurs="0">
+					<xs:complexType>
+						<xs:annotation>
+							<xs:documentation>This (empty) element disables the possibility to
+								filter for this spec.</xs:documentation>
+						</xs:annotation>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Constraint">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ShortName" minOccurs="0"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="SpecifiedBy"/>
+					<xs:element name="GlobalSpecifiedBy">
+						<xs:complexType>
+							<xs:attribute name="refMain" type="xs:IDREF" use="required">
+								<xs:annotation>
+									<xs:documentation>The reference to a spec reference from which
+										the error level is determined.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="refDerived" type="xs:IDREF" use="required">
+								<xs:annotation>
+									<xs:documentation>The reference to a global spec
+										reference.</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:element ref="ShortDescription"/>
+				<xs:element ref="LongDescription" minOccurs="0"/>
+				<xs:element ref="ShortDescriptionUser"/>
+				<xs:element ref="LongDescriptionUser" minOccurs="0"/>
+				<xs:element name="Parameters" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Parameter" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="Name"/>
+										<xs:element name="Type" minOccurs="0"/>
+										<xs:element ref="ShortDescription" minOccurs="0"/>
+										<xs:element ref="LongDescription" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Tagref"/>
+			</xs:sequence>
+			<xs:attribute name="ID" type="xs:ID" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ShortDescription">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="ShortDescriptionUser"/>
+
+	<xs:element name="LongDescription"/>
+
+	<xs:element name="LongDescriptionUser"/>
+
+	<xs:element name="Error_Level">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="FATAL"/>
+				<xs:enumeration value="ERROR"/>
+				<xs:enumeration value="WARNING"/>
+				<xs:enumeration value="INFO"/>
+				<xs:enumeration value="NONE">
+					<xs:annotation>
+						<xs:documentation>This value is only used in special cases e.g. for global
+							spec references which determine the applying error
+							level.</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="Tagref">
+		<xs:complexType>
+			<xs:attribute name="IDREF" type="xs:IDREF" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="SpecifiedBy">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SpecificationReference" type="xs:IDREF"/>
+				<xs:element name="SpecText" minOccurs="0"/>
+				<xs:element ref="Error_Level">
+					<xs:annotation>
+						<xs:documentation>This element has no meaning below a global spec
+							reference.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Chapter" minOccurs="0"/>
+				<xs:element name="Page" minOccurs="0"/>
+				<xs:element minOccurs="0" name="URI" type="xs:anyURI"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Tagref"/>
+			</xs:sequence>
+			<xs:attribute name="ID" type="xs:ID">
+				<xs:annotation>
+					<xs:documentation>An ID can be given to a spec reference if this would be used
+						in another context, e.g. if this is a global spec reference that is
+						referenced by multiple constraints or a spec reference from which a global
+						spec reference determines the error level.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

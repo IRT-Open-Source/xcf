@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+    <errorCategory>
+        <constraintID>d1e199</constraintID>
+        <shortUserDesc>The attribute ttp:dropMode shall not be  present.</shortUserDesc>
+        <longUserDesc>IMSC1 does not support clockmode. Therefore all attributes that related to clockmode are not part of the IMSC1 document model.</longUserDesc>
+        <specs>
+            <spec>
+                <name>TTML Profiles for Internet Media Subtitles and Captions 1.0 (IMSC1) - Text Profile</name>
+                <nameAcronym>IMSC1-Text</nameAcronym>
+                <section>Chapter 6.11<title></title></section>
+                <uri>https://www.w3.org/TR/ttml-imsc1/#common-features</uri>
+            </spec>
+        </specs>
+        <errors>
+            <error>
+                <messages>
+                    <messageMain>The attribute ttp:dropMode appears on element p.</messageMain>
+                </messages>
+                <locations>
+                </locations>
+            </error>
+            <error>
+                <messages>
+                    <messageMain>The attribute ttp:dropMode appears on element p.</messageMain>
+                </messages>
+                <locations>
+                    <location locationType="humanXpath">/tt/body/div/p[2]/@ttp:dropMode</location>
+                    <location locationType="resolvableXPATH">/*:tt[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:body[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:div[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:p[namespace-uri()='http://www.w3.org/ns/ttml'][2]/@*[local-name()='dropMode' and namespace-uri()='http://www.w3.org/ns/ttml#parameter']</location>
+                </locations>
+            </error>
+        </errors>
+        <errorLevel>ERROR</errorLevel>
+        <tags>
+            <tag type="area">
+                <shortDesc>Timing </shortDesc>
+                <longDesc>Some more detailed information about the timing category.</longDesc>
+            </tag>
+        </tags>
+    </errorCategory>
+    <errorCategory>
+        <constraintID>d1e287</constraintID>
+        <title>No negative length.</title>
+          <longUserDesc>IMSC1 does not support clockmode. Therefore all attributes that related to clockmode are not part of the IMSC1 document model.</longUserDesc>
+        <specs>
+            <spec>
+                <name>TTML Profiles for Internet Media Subtitles and Captions 1.0 (IMSC1) - Text Profile</name>
+                <nameAcronym>IMSC1-Text</nameAcronym>
+                <section>Chapter 6.11</section>
+                <uri>https://www.w3.org/TR/ttml-imsc1/#common-features</uri>
+            </spec>
+        </specs>
+        <errors>
+            <error>
+                <messages>
+                    <messageMain>The value of the attribute tts:origin is -10% -10%.</messageMain>
+                </messages>
+                <locations>
+                    <location locationType="humanXPATH">/tt/head/layout/region[2]/@tts:origin</location>
+                    <location locationType="resolvableXPATH">/*:tt[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:head[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:layout[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:region[namespace-uri()='http://www.w3.org/ns/ttml'][2]/@*[local-name()='origin' and namespace-uri()='http://www.w3.org/ns/ttml#styling']</location>
+                </locations>
+            </error>
+        </errors>
+        <errorLevel>ERROR</errorLevel>
+        <tags>
+            <tag>
+                <shortDesc>Styling</shortDesc>
+                <longDesc>More detailed information about the styling area.</longDesc>
+            </tag>
+        </tags>
+    </errorCategory>
+</result>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                        xmlns:saxon="http://saxon.sf.net/"
+                        xmlns:schold="http://www.ascc.net/xml/schematron"
+                        xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                        xmlns:subcheck="http://www.irt.de/subcheck"
+                        xmlns:tt="http://www.w3.org/ns/ttml"
+                        xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
+                        xmlns:tts="http://www.w3.org/ns/ttml#styling"
+                        xmlns:ttm="http://www.w3.org/ns/ttml#metadata"
+                        xmlns:ebutts="urn:ebu:tt:style"
+                        xmlns:ebuttm="urn:ebu:tt:metadata"
+                        xmlns:ittp="http://www.w3.org/ns/ttml/profile/imsc1#parameter"
+                        xmlns:itts="http://www.w3.org/ns/ttml/profile/imsc1#styling"
+                        xmlns:ittm="http://www.w3.org/ns/ttml/profile/imsc1#metadata"
+                        xmlns:smpte="http://www.smpte-ra.org/schemas/2052-1/2010/smpte-tt"
+                        title=""
+                        schemaVersion=""><!--   
+		   
+		   
+		 -->
+   <svrl:ns-prefix-in-attribute-values uri="http://www.irt.de/subcheck" prefix="subcheck"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml" prefix="tt"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml#parameter" prefix="ttp"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml#styling" prefix="tts"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml#metadata" prefix="ttm"/>
+   <svrl:ns-prefix-in-attribute-values uri="urn:ebu:tt:style" prefix="ebutts"/>
+   <svrl:ns-prefix-in-attribute-values uri="urn:ebu:tt:metadata" prefix="ebuttm"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml/profile/imsc1#parameter" prefix="ittp"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml/profile/imsc1#styling" prefix="itts"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml/profile/imsc1#metadata" prefix="ittm"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.smpte-ra.org/schemas/2052-1/2010/smpte-tt"
+                                       prefix="smpte"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeDefined"
+                        name="attributeDefined"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeNamespace"
+                        name="attributeNamespace"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="generic"
+                        name="generic"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="profileSignalling"
+                        name="profileSignalling"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="contentTimingInformation"
+                        name="contentTimingInformation"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="altTextConstraints"
+                        name="altTextConstraints"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="styleReferenceLoop"
+                        name="styleReferenceLoop"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="elementPresence"
+                        name="elementPresence"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeSignificance"
+                        name="attributeSignificance"/>
+   <svrl:failed-assert test="parent::tt:body | parent::tt:div | parent::tt:p | parent::tt:span | parent::tt:style | parent::tt:region"
+                       id="assert-d1e2-1"
+                       see="http://www.irt.de/subcheck/constraints/d1e2"
+                       location="/*:tt[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:body[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:div[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:p[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:br[namespace-uri()='http://www.w3.org/ns/ttml'][1]/@*[local-name()='backgroundColor' and namespace-uri()='http://www.w3.org/ns/ttml#styling']"
+                       subcheck:alternativeLocation="/tt/body/div/p/br/@tts:backgroundColor">
+      <svrl:text> The attribute tts:backgroundColor is defined on one of the following elements:
+                tt:body, tt:div, tt:p, tt:span, tt:style, tt:region. </svrl:text>
+      <svrl:diagnostic-reference diagnostic="attributeDefinedOn" fpi="definedOn">
+The attribute
+                tts:backgroundColor appears on element br.</svrl:diagnostic-reference>
+         <svrl:diagnostic-reference diagnostic="fooType" fpi="definedOn">A second diagnostic message.</svrl:diagnostic-reference>
+   </svrl:failed-assert>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeRequirement"
+                        name="attributeRequirement"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributePresence"
+                        name="attributePresence"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeValues"
+                        name="attributeValues"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeUnits"
+                        name="attributeUnits"/>
+   <svrl:failed-assert test="not(some $x in subcheck:string_to_units(.) satisfies $x eq 'px') or (/tt:tt/@tts:extent ne '')"
+                       id="assert-d1e1366-2"
+                       see="http://www.irt.de/subcheck/constraints/d1e1366"
+                       location="/*:tt[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:head[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:layout[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:region[namespace-uri()='http://www.w3.org/ns/ttml'][1]/@*[local-name()='extent' and namespace-uri()='http://www.w3.org/ns/ttml#styling']"
+                       subcheck:alternativeLocation="/tt/head/layout/region/@tts:extent">
+      <svrl:text>
+                If a tts:extent attribute uses the 'px' unit, the tts:extent on the tt:tt element is set.</svrl:text>
+   </svrl:failed-assert>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeTimingGeneral"
+                        name="attributeTimingGeneral"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeTimingFrameRate"
+                        name="attributeTimingFrameRate"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="attributeTimingTickRate"
+                        name="attributeTimingTickRate"/>
+   <svrl:active-pattern document="file:/home/user/test/schema/tests/test_files/rule-d1e2-002-1-FAIL.xml"
+                        id="netflixTextParagraphs"
+                        name="netflixTextParagraphs"/>
+</svrl:schematron-output>

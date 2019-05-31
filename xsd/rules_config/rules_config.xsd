@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	<xs:element name="RulesConfiguration">
+		<xs:annotation>
+			<xs:documentation>The container element for the rules configuration.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Specifications">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="Specification" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Specification">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="selectFilterInitial" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ID" type="xs:ID" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="selectFilterInitial">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>This (empty) element initially selects this spec for
+					filtering.</xs:documentation>
+			</xs:annotation>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
