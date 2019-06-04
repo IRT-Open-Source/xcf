@@ -112,6 +112,8 @@ The MIT License
 
 Copyright (c) 2004-2010 Rick Jellife and Academia Sinica Computing Centre, Taiwan
 
+Modifications Copyright (c) 2019 Institut für Rundfunktechnik GmbH, Munich.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -154,7 +156,7 @@ THE SOFTWARE.
    xmlns:schold="http://www.ascc.net/xml/schematron" 
    xmlns:iso="http://purl.oclc.org/dsdl/schematron"
    xmlns:svrl="http://purl.oclc.org/dsdl/svrl" 
-    
+   xmlns:subcheck="http://www.irt.de/subcheck"
 >
 
 <!-- Select the import statement and adjust the path as 
@@ -185,9 +187,9 @@ THE SOFTWARE.
 		<xsl:otherwise>#ALL</xsl:otherwise>
 	</xsl:choose>
 </xsl:param>
-<xsl:param name="allow-foreign">false</xsl:param>
+<xsl:param name="allow-foreign">true</xsl:param>
 <xsl:param name="generate-paths">true</xsl:param>
-<xsl:param name="generate-fired-rule">true</xsl:param>
+<xsl:param name="generate-fired-rule">false</xsl:param>
 <xsl:param name="optimize" />
 <!-- e.g. saxon file.xml file.xsl "sch.exslt.imports=.../string.xsl;.../math.xsl" -->
 <xsl:param name="sch.exslt.imports" />
@@ -299,6 +301,15 @@ THE SOFTWARE.
 			<axsl:attribute name="location">
 				<axsl:apply-templates select="." mode="schematron-select-full-path"/>
 			</axsl:attribute>
+			<!-- This is an IRT addition to combine human readable XPATH and machine resolvable XPATH
+			in one SVRL document. This applies only when the regular location notation is set to "machine resolvable" (1). -->
+			<xsl:if test="$full-path-notation = 1">
+				<xsl:comment>IRT extension - START</xsl:comment>
+				<axsl:attribute name="subcheck:alternativeLocation">
+					<axsl:apply-templates select="." mode="schematron-select-alternative-path"/>
+				</axsl:attribute>
+				<xsl:comment>IRT extension - END</xsl:comment>
+			</xsl:if>
 		</xsl:if>
 		  
 		<svrl:text>

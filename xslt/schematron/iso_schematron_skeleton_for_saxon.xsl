@@ -38,6 +38,8 @@ The MIT License
 
 Copyright (c)  2000-2010 Rick Jellife and Academia Sinica Computing Centre, Taiwan.
 
+Modifications Copyright (c) 2019 Institut für Rundfunktechnik GmbH, Munich.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -515,13 +517,17 @@ which require a preprocess.
   node()[not(self::text())] is slower in saxon than *|comment()|processing-instruction() 
   which I find a bit surprising but anyway I'll use the longr faster version.
 -->
-<xsl:variable name="context-xpath">
-  <xsl:if test="$attributes='true' and parent::node() ">@*|</xsl:if>
+<!-- IRT modification: don't try to access attribute children when on document node, to silence Saxon warning -->
+<xsl:variable name="context-xpath-base">
   <xsl:choose>
     <xsl:when test="$only-child-elements='true'">*</xsl:when>
     <xsl:when test="$visit-text='true'">node()</xsl:when>
     <xsl:otherwise>*|comment()|processing-instruction()</xsl:otherwise>
   </xsl:choose>
+</xsl:variable>
+<xsl:variable name="context-xpath">
+  <xsl:if test="$attributes='true'">@*|</xsl:if><!-- fix attribute matching condition; see also https://github.com/Schematron/schematron/issues/29 -->
+  <xsl:value-of select="$context-xpath-base"/>
 </xsl:variable>
 
 <!-- DPC if this is set to 
@@ -700,7 +706,7 @@ which require a preprocess.
 		<xsl:text>&#10;&#10;</xsl:text>
 		<xsl:comment>MODE: SCHEMATRON-SELECT-FULL-PATH</xsl:comment><xsl:text>&#10;</xsl:text>
 		<xsl:comment>This mode can be used to generate an ugly though full XPath for locators</xsl:comment><xsl:text>&#10;</xsl:text>
-   		<axsl:template match="*" mode="schematron-select-full-path">
+   		<axsl:template match="@* | *" mode="schematron-select-full-path">
    			<xsl:choose>
    				<xsl:when test=" $full-path-notation = '1' ">
    					<!-- Use for computers, but rather unreadable for humans -->
@@ -721,8 +727,12 @@ which require a preprocess.
                 </xsl:otherwise>
 			</xsl:choose>
 		</axsl:template>
-	
-
+		<!-- This template is an IRT extension and is used to generate the XPATH for humans when the regular location notation is set to "machine resolvable". In this case both types are present. -->
+		<xsl:comment>IRT extension - START</xsl:comment>
+		<axsl:template match="@* | *" mode="schematron-select-alternative-path">
+			<axsl:apply-templates select="." mode="schematron-get-full-path-2"/>
+		</axsl:template>
+		<xsl:comment>IRT extension - END</xsl:comment>
 		<xsl:text>&#10;&#10;</xsl:text>
 		<xsl:comment>MODE: SCHEMATRON-FULL-PATH</xsl:comment><xsl:text>&#10;</xsl:text>
 		<xsl:comment>This mode can be used to generate an ugly though full XPath for locators</xsl:comment><xsl:text>&#10;</xsl:text>
@@ -830,7 +840,8 @@ which require a preprocess.
 		<axsl:for-each select="ancestor-or-self::*">
 			<axsl:text>/</axsl:text>
 			<axsl:value-of select="name(.)"/>
-			<axsl:if test="preceding-sibling::*[name(.)=name(current())]">
+			<!-- IRT modification: fix first of multiple children in human XPath, see https://github.com/Schematron/schematron/issues/54 -->
+			<axsl:if test="preceding-sibling::*[name(.)=name(current())] or following-sibling::*[name(.)=name(current())]">
 				<axsl:text>[</axsl:text>
 				<axsl:value-of
 					select="count(preceding-sibling::*[name(.)=name(current())])+1"/>
@@ -1648,8 +1659,15 @@ which require a preprocess.
 				
 			<xsl:apply-templates/>
 			<!-- DPC introduce context-xpath and select-contexts variables -->
-			<xsl:if test="not($select-contexts)">
-			  <axsl:apply-templates select="{$context-xpath}" mode="M{count(../preceding-sibling::*)}"/>
+			<!--
+				IRT modification:
+				Don't apply templates to access children when on an attribute, to silence Saxon warning.
+				Hereby the attribute must be specified right at the beginning of the context attribute and afterwards, either nothing or a predicate follows.
+				Also the name matching is quite conservative so that some attributes may be excluded by it.
+			-->
+			<xsl:variable name="regex_attribute_context" select="'^(attribute::|@)([A-Za-z0-9_.-]+|\*)(:([A-Za-z0-9_.-]+|\*))?(\[.*\])?$'"/>
+			<xsl:if test="not($select-contexts) and not(matches(@context, $regex_attribute_context))">
+				<axsl:apply-templates select="{if(@context eq '/') then $context-xpath-base else $context-xpath}" mode="M{count(../preceding-sibling::*)}"/>
 			</xsl:if>
 		</axsl:template>
 	</xsl:template>
