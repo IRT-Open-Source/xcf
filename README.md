@@ -38,7 +38,7 @@ This XSD restricts the rules configuration XML file that is used by XCF.
 
 ### /xslt/reportview/reportview.xsl
 This XSLT transforms the SVRL result of XCF into a custom XML
-representation which is as "View Model" by other components (e.g. the 
+representation which acts as "View Model" for other components (e.g. the
 XCF web app).
 
 The result needs to be valid against the `reportview.xsd`.
@@ -46,12 +46,12 @@ The result needs to be valid against the `reportview.xsd`.
 ### /xslt/schematron
 This folder contains a customized Schematron-to-XSLT set of XSLT files
 that is used to transform the Schematron rules into a more convenient
-XSLT file.
+XSLT file. It is based on the [Schematron reference implementation](https://github.com/Schematron/schematron/commit/e16ecc490f9c6429f275ea268279787a71ff298f).
 
 Only small parts have been changed (e.g. to bug fix known issues).
-Compared to the [original repository](https://github.com/Schematron/schematron), also the files targetting
-XSLT1 have been removed, as the fixes have only been implemented for the
-XSLT2 version.
+Compared to the unmodified reference implementation, also the files
+targetting XSLT1 have been removed, as the fixes have only been
+implemented for the XSLT2 version.
 
 
 ## Compiling the Schematron rules to XSLT
@@ -71,3 +71,8 @@ Parts of the XCF were developed in the European collaborative research
 project HBB4ALL  (Grant Agreement no 621014). This project has received
 funding from the European Union ICT Policy Support Programme (ICT PSP)
 under the Competitiveness and Innovation Framework Programme (CIP).
+
+
+## License
+The XCF offered by Institut für Rundfunktechnik GmbH is subject to the
+[MIT license](LICENSE).
