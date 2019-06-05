@@ -46,7 +46,7 @@ The result needs to be valid against the `reportview.xsd`.
 ### /xslt/schematron
 This folder contains a customized Schematron-to-XSLT set of XSLT files
 that is used to transform the Schematron rules into a more convenient
-XSLT file. It is based on the [Schematron reference implementation](https://github.com/Schematron/schematron/commit/e16ecc490f9c6429f275ea268279787a71ff298f).
+XSLT file. It is based on the [Schematron reference implementation](https://github.com/Schematron/schematron/tree/e16ecc490f9c6429f275ea268279787a71ff298f).
 
 Only small parts have been changed (e.g. to bug fix known issues).
 Compared to the unmodified reference implementation, also the files
