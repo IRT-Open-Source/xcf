@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs svrl subcheck" version="2.0"
-    xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:subcheck="http://www.irt.de/subcheck">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs svrl xcf" version="2.0"
+    xmlns:svrl="http://purl.oclc.org/dsdl/svrl" xmlns:xcf="http://www.irt.de/xcf">
     <xsl:strip-space elements="*"/>
     <xsl:param name="constraints_path" select="'constraints.xml'"/>
     <xsl:param name="error_limit">50</xsl:param><!-- 'none' disables the limit -->
@@ -31,7 +31,7 @@
                 <xsl:sort select="@see"/>
 
                 <!-- get constraint (ID) -->
-                <xsl:variable name="constraintId" select="replace(current-grouping-key(), 'http://www.irt.de/subcheck/constraints/', '')"/>
+                <xsl:variable name="constraintId" select="tokenize(current-grouping-key(), '/')[last()]"/>
                 <xsl:variable name="constraint" select="$constraints//Constraint[@ID = $constraintId]"/>
                 
                 <!-- determine the referenced normal/global specs that are not disabled -->
@@ -83,7 +83,7 @@
                                    </messages>
                                    <locations>
                                        <location locationType="resolvableXPATH"><xsl:value-of select="@location"/></location>
-                                       <location locationType="humanXPATH"><xsl:value-of select="@subcheck:alternativeLocation"/></location>
+                                       <location locationType="humanXPATH"><xsl:value-of select="@xcf:alternativeLocation"/></location>
                                    </locations>
                                </error>
                            </xsl:for-each>

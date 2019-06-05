@@ -6,7 +6,7 @@
                         xmlns:schold="http://www.ascc.net/xml/schematron"
                         xmlns:iso="http://purl.oclc.org/dsdl/schematron"
                         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-                        xmlns:subcheck="http://www.irt.de/subcheck"
+                        xmlns:xcf="http://www.irt.de/xcf"
                         xmlns:tt="http://www.w3.org/ns/ttml"
                         xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
                         xmlns:tts="http://www.w3.org/ns/ttml#styling"
@@ -22,7 +22,7 @@
 		   
 		   
 		 -->
-   <svrl:ns-prefix-in-attribute-values uri="http://www.irt.de/subcheck" prefix="subcheck"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.irt.de/xcf" prefix="xcf"/>
    <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml" prefix="tt"/>
    <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml#parameter" prefix="ttp"/>
    <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/ns/ttml#styling" prefix="tts"/>
@@ -65,7 +65,7 @@
                        id="assert-d1e2-1"
                        see="http://www.irt.de/subcheck/constraints/d1e2"
                        location="/*:tt[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:body[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:div[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:p[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:br[namespace-uri()='http://www.w3.org/ns/ttml'][1]/@*[local-name()='backgroundColor' and namespace-uri()='http://www.w3.org/ns/ttml#styling']"
-                       subcheck:alternativeLocation="/tt/body/div/p/br/@tts:backgroundColor">
+                       xcf:alternativeLocation="/tt/body/div/p/br/@tts:backgroundColor">
       <svrl:text> The attribute tts:backgroundColor is defined on one of the following elements:
                 tt:body, tt:div, tt:p, tt:span, tt:style, tt:region. </svrl:text>
       <svrl:diagnostic-reference diagnostic="attributeDefinedOn" fpi="definedOn">
@@ -89,7 +89,7 @@ The attribute
                        id="assert-d1e1366-2"
                        see="http://www.irt.de/subcheck/constraints/d1e1366"
                        location="/*:tt[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:head[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:layout[namespace-uri()='http://www.w3.org/ns/ttml'][1]/*:region[namespace-uri()='http://www.w3.org/ns/ttml'][1]/@*[local-name()='extent' and namespace-uri()='http://www.w3.org/ns/ttml#styling']"
-                       subcheck:alternativeLocation="/tt/head/layout/region/@tts:extent">
+                       xcf:alternativeLocation="/tt/head/layout/region/@tts:extent">
       <svrl:text>
                 If a tts:extent attribute uses the 'px' unit, the tts:extent on the tt:tt element is set.</svrl:text>
    </svrl:failed-assert>

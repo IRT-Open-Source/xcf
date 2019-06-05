@@ -156,7 +156,7 @@ THE SOFTWARE.
    xmlns:schold="http://www.ascc.net/xml/schematron" 
    xmlns:iso="http://purl.oclc.org/dsdl/schematron"
    xmlns:svrl="http://purl.oclc.org/dsdl/svrl" 
-   xmlns:subcheck="http://www.irt.de/subcheck"
+   xmlns:xcf="http://www.irt.de/xcf"
 >
 
 <!-- Select the import statement and adjust the path as 
@@ -305,7 +305,7 @@ THE SOFTWARE.
 			in one SVRL document. This applies only when the regular location notation is set to "machine resolvable" (1). -->
 			<xsl:if test="$full-path-notation = 1">
 				<xsl:comment>IRT extension - START</xsl:comment>
-				<axsl:attribute name="subcheck:alternativeLocation">
+				<axsl:attribute name="xcf:alternativeLocation">
 					<axsl:apply-templates select="." mode="schematron-select-alternative-path"/>
 				</axsl:attribute>
 				<xsl:comment>IRT extension - END</xsl:comment>
