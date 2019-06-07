@@ -22,6 +22,10 @@ A sample set of constraints/rules is contained in the
 Constraints/rules for TTML subtitles can be found in the
 [`xcf_suite_ttml` repository](https://github.com/IRT-Open-Source/xcf_suite_ttml).
 
+The [repository `xcf_web_app`](https://git.basex.io/xcf/xcf_web_app) contains the XCF web app from BaseX that
+allows to easily execute an XCF check in a browser window, resulting in
+a visual presentation of the check results.
+
 
 ## Details for specific files
 
